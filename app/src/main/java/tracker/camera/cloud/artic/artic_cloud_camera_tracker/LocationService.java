@@ -11,21 +11,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
-
-import org.glassfish.tyrus.client.ClientManager;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.URI;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
-import javax.websocket.ClientEndpointConfig;
-import javax.websocket.Endpoint;
-import javax.websocket.EndpointConfig;
-import javax.websocket.MessageHandler;
-import javax.websocket.Session;
 
 /**
  * Get location of device and send it to Cloud
