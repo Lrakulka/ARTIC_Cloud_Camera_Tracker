@@ -35,7 +35,8 @@ public class TrackerWebSocket {
     private Session session;
     // Show information to user
     private TextView textView;
-
+    // Holder operations with camera
+    private VideoService videoService;
 
     // Create JSON request message for registration
     private JSONObject reqMessage;
@@ -47,9 +48,11 @@ public class TrackerWebSocket {
      * @param deviceId - id of device
      * @param deviceToken - token of device
      * @param webSocketURL - webSocket URL
+     * @param videoService - control video and photo making
      */
     public TrackerWebSocket(String deviceId, String deviceToken,
-                            String webSocketURL, TextView textView) {
+                            String webSocketURL, TextView textView, VideoService videoService) {
+        this.videoService = videoService;
         this.deviceId = deviceId;
         this.deviceToken = deviceToken;
         this.webSocketURL = webSocketURL;
@@ -168,7 +171,7 @@ public class TrackerWebSocket {
 
     /**
      * Method processes all incoming messages
-     * @param jsonMessage
+     * @param jsonMessage - incoming message from ARTIC Cloud
      */
     private void webSocketListener(JSONObject jsonMessage) {
         // Ping message
@@ -176,7 +179,7 @@ public class TrackerWebSocket {
             if (jsonMessage.getString("type").equals("ping")) {
                 pingListener(jsonMessage.getLong("ts"));
                 return;
-            };
+            }
         } catch (JSONException e) {
             //e.printStackTrace();
         }
@@ -207,7 +210,7 @@ public class TrackerWebSocket {
         try {
             setText("Error code " + jsonMessage.getJSONObject("error").getString("code"));
         } catch (JSONException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -220,17 +223,17 @@ public class TrackerWebSocket {
         switch (actionName) {
             // Send response to ARTIC cloud when makes photo
             case "makePhoto" :
-                System.out.println("makePhoto");
+                videoService.makePhoto();
                 sendMessage("{\"makePhoto\":\"" + true + "\"}");
                 break;
             // Send response to ARTIC cloud when starts video
             case "setOnVideo" :
-                System.out.println("setOnVideo");
+                videoService.startRecord();
                 sendMessage("{\"startVideo\":\"" + true + "\"}");
                 break;
             // Send response to ARTIC cloud when stops video
             case "setOffVideo" :
-                System.out.println("setOffVideo");
+                videoService.stopRecord();
                 sendMessage("{\"stopVideo\":\"" + true + "\"}");
                 break;
         }
