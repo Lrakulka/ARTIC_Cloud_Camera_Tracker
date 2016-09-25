@@ -175,8 +175,8 @@ public class TrackerWebSocket {
         try {
             if (jsonMessage.getString("type").equals("ping")) {
                 pingListener(jsonMessage.getLong("ts"));
+                return;
             };
-            return;
         } catch (JSONException e) {
             //e.printStackTrace();
         }
@@ -198,15 +198,14 @@ public class TrackerWebSocket {
             if (jsonMessage.getString("type").equals("action")) {
                 executeAction(jsonMessage.getJSONObject("data").getJSONArray("actions")
                         .optJSONObject(0).getString("name"));
+                return;
             }
-            return;
         } catch (JSONException e) {
             //e.printStackTrace();
         }
         // Error message
         try {
             setText("Error code " + jsonMessage.getJSONObject("error").getString("code"));
-            return;
         } catch (JSONException e) {
             e.printStackTrace();
         }
