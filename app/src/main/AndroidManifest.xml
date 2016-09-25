@@ -5,6 +5,8 @@
     <!-- For Android app you need set permission for modules which your app will use! -->
     <!-- If you whant to know more read this article:
         https://developer.android.com/guide/topics/security/permissions.html  -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application

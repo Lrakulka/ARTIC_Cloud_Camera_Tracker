@@ -28,12 +28,7 @@ public class MainActivity extends AppCompatActivity {
         TrackerWebSocket trackerWebSocket = new TrackerWebSocket(DEVICE_ID,
                 DEVICE_TOKEN, WEB_SOCKET_URL, textView);
         trackerWebSocket.connect();
-
-        /*try {
-            Thread.sleep(15000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        trackerWebSocket.sendRegisterMessage();*/
+        LocationService locationService = new LocationService(trackerWebSocket, this);
+        locationService.start();
     }
 }

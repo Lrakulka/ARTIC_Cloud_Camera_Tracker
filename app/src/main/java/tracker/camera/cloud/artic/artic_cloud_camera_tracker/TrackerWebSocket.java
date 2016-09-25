@@ -117,7 +117,9 @@ public class TrackerWebSocket {
      * @param y - the coordinate of vector Y
      */
     public void sendCoordinateLocation(double x, double y) {
-        sendMessage("{\"coordinateX\":\"" + x + "\",\"coordinateY\":\"" + y + "\"}");
+        if (isWebSocketReady) {
+            sendMessage("{\"coordinateX\":\"" + x + "\",\"coordinateY\":\"" + y + "\"}");
+        }
     }
 
     /**
@@ -176,7 +178,7 @@ public class TrackerWebSocket {
             };
             return;
         } catch (JSONException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         // Registration response message
         try {
@@ -189,7 +191,7 @@ public class TrackerWebSocket {
             }
             return;
         } catch (JSONException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         // Action message
         try {
@@ -199,7 +201,7 @@ public class TrackerWebSocket {
             }
             return;
         } catch (JSONException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         // Error message
         try {
@@ -253,12 +255,12 @@ public class TrackerWebSocket {
 
     /**
      * Executed when gets ping message from ARTIC Cloud
-     * Normally ARTIC Cloud send ping message every 30 seconds
+     * Normally ARTIC Cloud sending ping message every 30 seconds
      * @param pingTime - time in milliseconds when was send ping message
      */
     private void pingListener(long pingTime) {
         setText("Last ping message received " +
-                (System.currentTimeMillis() - pingTime) / 60 + " sec ago");
+                (pingTime - System.currentTimeMillis()) + " millsec ago");
     }
 
     // TextView not changing from non main thread
