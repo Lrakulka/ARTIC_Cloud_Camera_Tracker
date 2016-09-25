@@ -260,7 +260,7 @@ public class TrackerWebSocket {
      */
     private void pingListener(long pingTime) {
         setText("Last ping message received " +
-                (pingTime - System.currentTimeMillis()) + " millsec ago");
+                (System.currentTimeMillis() - pingTime) + " millsec ago");
     }
 
     // TextView not changing from non main thread
