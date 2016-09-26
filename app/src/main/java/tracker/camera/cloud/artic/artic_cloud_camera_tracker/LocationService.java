@@ -47,7 +47,7 @@ public class LocationService {
                     start = false;
                 }
                 /* Every 30 seconds checks coordinates if they changed
-                        sent message to ARTIC Cloud with new coordinates */
+                        sent message to ARTIK Cloud with new coordinates */
                 while (start) {
                     // Get coordinates
                     for (int i = providers.size() - 1; i >= 0; i--) {

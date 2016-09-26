@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     // App configuration. Used in TrackerWebSocket.
-    // You can read about ARTIC WebSocket here:
+    // You can read about ARTIK WebSocket here:
     // https://developer.artik.cloud/documentation/api-reference/websockets-api.html#device-channel-websocket
     public static final String WEB_SOCKET_URL = "wss://api.artik.cloud/v1.1/websocket?ack=true";
     // Device ID and TIKEN you can find here: https://artik.cloud/my/devices in menu Device Info

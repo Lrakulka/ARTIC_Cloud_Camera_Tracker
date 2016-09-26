@@ -38,7 +38,7 @@ public class VideoService {
     public VideoService(Activity activity) {
         // Creating directory for videos and photos
         sdCardDir = Environment.getExternalStorageDirectory();
-        sdCardDir = new File (sdCardDir.getAbsolutePath() + "/ARTIC_Cloud");
+        sdCardDir = new File (sdCardDir.getAbsolutePath() + "/ARTIK_Cloud");
         sdCardDir.mkdirs();
 
         // Formatter for data. Used in name for video and photo

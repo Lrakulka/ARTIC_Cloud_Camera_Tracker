@@ -60,7 +60,7 @@ public class TrackerWebSocket {
 
         reqMessage = new JSONObject();
         message = new JSONObject();
-        // Creating messages for ARTIC Cloud
+        // Creating messages for ARTIK Cloud
         try {
             reqMessage.put("type", "register");
             reqMessage.put("sdid", deviceId);
@@ -76,7 +76,7 @@ public class TrackerWebSocket {
     }
 
     /**
-     * Execute asyncTask which trying to connect to ARTIC Cloud
+     * Execute asyncTask which trying to connect to ARTIK Cloud
      */
     public void connect() {
         // Create Thread to execute registration operation
@@ -116,7 +116,7 @@ public class TrackerWebSocket {
     }
 
     /**
-     * Send coordinates of device location to ARTIC Cloud
+     * Send coordinates of device location to ARTIK Cloud
      * @param x - the coordinate of vector X
      * @param y - the coordinate of vector Y
      */
@@ -157,7 +157,7 @@ public class TrackerWebSocket {
     }
 
     /**
-     * Send register message to ARTIC Cloud.
+     * Send register message to ARTIK Cloud.
      * Don't forget to connect to cloud
      * You need to call isWebSocketReady() to know when socket ready
      */
@@ -172,7 +172,7 @@ public class TrackerWebSocket {
 
     /**
      * Method processes all incoming messages
-     * @param jsonMessage - incoming message from ARTIC Cloud
+     * @param jsonMessage - incoming message from ARTIK Cloud
      */
     private void webSocketListener(JSONObject jsonMessage) {
         // Ping message
@@ -216,23 +216,23 @@ public class TrackerWebSocket {
     }
 
     /**
-     * Execute action which received from ARTIC Cloud
+     * Execute action which received from ARTIK Cloud
      * @param actionName name of the action
      */
     private void executeAction(String actionName) {
         // Device Actions
         switch (actionName) {
-            // Send response to ARTIC cloud when makes photo
+            // Send response to ARTIK cloud when makes photo
             case "makePhoto" :
                 videoService.makePhoto();
                 sendMessage("{\"makePhoto\":\"" + true + "\"}");
                 break;
-            // Send response to ARTIC cloud when starts video
+            // Send response to ARTIK cloud when starts video
             case "setOnVideo" :
                 videoService.startRecord();
                 sendMessage("{\"startVideo\":\"" + true + "\"}");
                 break;
-            // Send response to ARTIC cloud when stops video
+            // Send response to ARTIK cloud when stops video
             case "setOffVideo" :
                 videoService.stopRecord();
                 sendMessage("{\"stopVideo\":\"" + true + "\"}");
@@ -241,7 +241,7 @@ public class TrackerWebSocket {
     }
 
     /**
-     * Send message to ARTIC Cloud
+     * Send message to ARTIK Cloud
      */
     private void sendMessage(String data) {
         if (session.isOpen()) {
@@ -257,8 +257,8 @@ public class TrackerWebSocket {
     }
 
     /**
-     * Executed when gets ping message from ARTIC Cloud
-     * Normally ARTIC Cloud sending ping message every 30 seconds
+     * Executed when gets ping message from ARTIK Cloud
+     * Normally ARTIK Cloud sending ping message every 30 seconds
      * @param pingTime - time in milliseconds when was send ping message
      */
     private void pingListener(long pingTime) {

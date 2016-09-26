@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ARTIC_Cloud_Camera_Tracker</string>
+    <string name="app_name">ARTIK_Cloud_Camera_Tracker</string>
     <string name="button_text">Do It!</string>
     <string name="button_text_stop">StopDoIt!</string>
     <string name="image_description">ARTIK Cloud</string>
