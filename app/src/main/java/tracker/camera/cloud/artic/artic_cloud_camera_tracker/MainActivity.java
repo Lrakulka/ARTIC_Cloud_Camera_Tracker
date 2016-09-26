@@ -17,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     // Video service
     private VideoService videoService;
+    // Web Socket service
+    private TrackerWebSocket trackerWebSocket;
+    // Coordinates service
+    private LocationService locationService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +28,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textView = (TextView) findViewById(R.id.textView);
         videoService = new VideoService(this);
+        trackerWebSocket = new TrackerWebSocket(DEVICE_ID,
+                DEVICE_TOKEN, WEB_SOCKET_URL, textView, videoService);
+        locationService = new LocationService(trackerWebSocket, this);
     }
 
-    public void onClick(View v) {
-        TrackerWebSocket trackerWebSocket = new TrackerWebSocket(DEVICE_ID,
-                DEVICE_TOKEN, WEB_SOCKET_URL, textView, videoService);
+    public void doId(View v) {
         trackerWebSocket.connect();
-        LocationService locationService = new LocationService(trackerWebSocket, this);
         locationService.start();
+    }
+
+    public void stopDoIt(View v) {
+        locationService.stop();
+        trackerWebSocket.closeSession();
+        textView.setText("Session closed");
     }
 
     @Override

@@ -130,7 +130,7 @@ public class TrackerWebSocket {
      * Close WebSocket session
      */
     public void closeSession() {
-        if (session.isOpen()) {
+        if (session != null && session.isOpen()) {
             try {
                 session.close();
             } catch (IOException e) {
