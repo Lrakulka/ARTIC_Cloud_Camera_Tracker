@@ -60,6 +60,7 @@ public class TrackerWebSocket {
 
         reqMessage = new JSONObject();
         message = new JSONObject();
+        // Creating messages for ARTIC Cloud
         try {
             reqMessage.put("type", "register");
             reqMessage.put("sdid", deviceId);

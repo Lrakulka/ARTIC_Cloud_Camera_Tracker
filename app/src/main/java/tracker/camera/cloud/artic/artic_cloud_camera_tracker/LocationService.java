@@ -46,11 +46,15 @@ public class LocationService {
                                 .ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
                     start = false;
                 }
+                /* Every 30 seconds checks coordinates if they changed
+                        sent message to ARTIC Cloud with new coordinates */
                 while (start) {
+                    // Get coordinates
                     for (int i = providers.size() - 1; i >= 0; i--) {
                         l = lm.getLastKnownLocation(providers.get(i));
                         if (l != null) break;
                     }
+                    // Check coordinates
                     if (location == null || location.equals(l)) {
                         trackerWebSocket.sendCoordinateLocation(l.getLatitude(), l.getLongitude());
                         location = l;

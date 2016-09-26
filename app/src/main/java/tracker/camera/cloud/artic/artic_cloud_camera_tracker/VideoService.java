@@ -20,20 +20,28 @@ import java.util.Date;
  */
 
 public class VideoService {
-    // For video recording and photo making
+    // Preview of camera
     private SurfaceView surfaceView;
+    // Device camera class
     private Camera camera;
+    // Record video and audio
     private MediaRecorder mediaRecorder;
+    // Dit of photo
     private File photoFile;
+    // Dir of video
     private File videoFile;
+    // Formatter of data
     private DateFormat dateFormat;
+    // Dir of sdcard
     private File sdCardDir;
 
     public VideoService(Activity activity) {
+        // Creating directory for videos and photos
         sdCardDir = Environment.getExternalStorageDirectory();
         sdCardDir = new File (sdCardDir.getAbsolutePath() + "/ARTIC_Cloud");
         sdCardDir.mkdirs();
 
+        // Formatter for data. Used in name for video and photo
         dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH:mm:ss");
         surfaceView = (SurfaceView) activity.findViewById(R.id.surfaceView);
 
@@ -59,13 +67,18 @@ public class VideoService {
             }
         });
     }
-    
-   
+
+    /**
+     * Resume camera work
+     */
     public void resume() {
         camera = Camera.open();
         camera.setDisplayOrientation(90);
     }
 
+    /**
+     * Pause camera work
+     */
     public void pause() {
         releaseMediaRecorder();
         if (camera != null)
@@ -73,6 +86,9 @@ public class VideoService {
         camera = null;
     }
 
+    /**
+     * Make photo from camera
+     */
     public void makePhoto() {
         camera.takePicture(null, null, new Camera.PictureCallback() {
             @Override
@@ -91,6 +107,9 @@ public class VideoService {
 
     }
 
+    /**
+     * Start recording video
+     */
     public void startRecord() {
         if (prepareVideoRecorder()) {
             mediaRecorder.start();
@@ -99,6 +118,9 @@ public class VideoService {
         }
     }
 
+    /**
+     * Stop recording video
+     */
     public void stopRecord() {
         if (mediaRecorder != null) {
             mediaRecorder.stop();
