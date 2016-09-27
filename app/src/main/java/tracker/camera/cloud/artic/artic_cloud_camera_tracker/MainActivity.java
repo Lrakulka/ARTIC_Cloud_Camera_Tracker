@@ -11,8 +11,8 @@ public class MainActivity extends AppCompatActivity {
     // https://developer.artik.cloud/documentation/api-reference/websockets-api.html#device-channel-websocket
     public static final String WEB_SOCKET_URL = "wss://api.artik.cloud/v1.1/websocket?ack=true";
     // Device ID and TIKEN you can find here: https://artik.cloud/my/devices in menu Device Info
-    public static final String DEVICE_ID = "0b5cfbecdfa04fbfa8b7a331c85fb6a0";
-    public static final String DEVICE_TOKEN = "e40252caca6c4b85af45a266f5be82a6";
+    public static final String DEVICE_ID = "<YOUR DEVICE ID>";
+    public static final String DEVICE_TOKEN = "<YOUR DEVICE TOKEN>";
     //Text View for user messages
     private TextView textView;
     // Video service
