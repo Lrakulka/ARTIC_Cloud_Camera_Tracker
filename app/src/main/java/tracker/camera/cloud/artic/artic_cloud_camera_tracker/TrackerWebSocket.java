@@ -177,41 +177,43 @@ public class TrackerWebSocket {
     private void webSocketListener(JSONObject jsonMessage) {
         // Ping message
         try {
-            if (jsonMessage.getString("type").equals("ping")) {
+            if (jsonMessage.has("type") && jsonMessage.getJSONObject("type").equals("ping")) {
                 pingListener(jsonMessage.getLong("ts"));
                 return;
             }
         } catch (JSONException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         // Registration response message
-        try {
-            int code = jsonMessage.getJSONObject("data").getInt("code");
-            if (code == 200) {
-                isWebSocketReady = true;
-                setText("Connected. Happy work");
-            } else {
-                setText("Error code " + code);
+        if (jsonMessage.has("data")) {
+            try {
+                int code = jsonMessage.getJSONObject("data").getInt("code");
+                if (code == 200) {
+                    isWebSocketReady = true;
+                    setText("Connected. Happy work");
+                } else {
+                    setText("Error code " + code);
+                }
+                return;
+            } catch (JSONException e){
+                e.printStackTrace();
             }
-            return;
-        } catch (JSONException e) {
-            //e.printStackTrace();
         }
         // Action message
         try {
-            if (jsonMessage.getString("type").equals("action")) {
+            if (jsonMessage.has("type") && jsonMessage.getString("type").equals("action")) {
                 executeAction(jsonMessage.getJSONObject("data").getJSONArray("actions")
                         .optJSONObject(0).getString("name"));
                 return;
             }
         } catch (JSONException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         // Error message
         try {
             setText("Error code " + jsonMessage.getJSONObject("error").getString("code"));
         } catch (JSONException e) {
-            // e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
